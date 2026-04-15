@@ -176,6 +176,19 @@ Fala pronta detalhada:
 
 "Antes de levar a abordagem para o problema geral de Job Shop, fizemos o teste no grafo fixo fornecido pelo enunciado. Esse teste foi importante porque isolou a parte de teoria de grafos do restante do problema. Nele, validamos a ordenacao topologica, o calculo do caminho maximo e a reconstrucao dos caminhos ate os vertices finais pedidos no trabalho. Isso nos deu seguranca de que a base teorica da solucao estava correta antes de aplicar a mesma ideia ao conjunto completo de instancias JSP." 
 
+Dados objetivos para apresentar no slide:
+
+- ordem topologica percorrida no teste fixo: 4, 7, 8, 10, 1, 2, 3, 5, 11, 12, 14, 13, 15, 6, 9
+- caminho maximo de um vertice minimal a um maximal: 7 -> 10 -> 1 -> 11 -> 14 -> 13 -> 6
+- comprimento do caminho maximo global: 62
+- caminho maximo ate o final da linha 6: 7 -> 10 -> 1 -> 11 -> 14 -> 13 -> 6 (comprimento 62)
+- caminho maximo ate o final da linha 13: 7 -> 10 -> 1 -> 11 -> 14 -> 13 (comprimento 56)
+- caminho maximo ate o final da linha 9: 7 -> 10 -> 1 -> 11 -> 15 -> 9 (comprimento 53)
+
+Fala curta com numeros:
+
+"No grafo fixo do enunciado, a ordem topologica obtida foi 4, 7, 8, 10, 1, 2, 3, 5, 11, 12, 14, 13, 15, 6 e 9. O caminho critico global encontrado foi 7-10-1-11-14-13-6, com comprimento 62. Tambem validamos os caminhos pedidos ate os finais das linhas 6, 13 e 9, com comprimentos 62, 56 e 53, respectivamente. Esses numeros confirmam que a implementacao da parte de DAG esta correta antes de escalar para o JSP completo." 
+
 Mostre:
 
 - [output/fixed_graph_report.txt](output/fixed_graph_report.txt)
@@ -189,6 +202,20 @@ Fala sugerida:
 Fala pronta detalhada:
 
 "Depois da validacao no grafo fixo, executamos a solucao em todas as 162 instancias JSP fornecidas. Para cada instancia, o programa gerou uma agenda viavel, calculou o makespan, identificou o caminho critico e registrou essas informacoes em arquivos de saida. Alem disso, produzimos uma tabela consolidada com todos os resultados e um detalhamento por instancia, incluindo sequencias de maquina, sequencias de job e dados do caminho critico. Isso foi importante para garantir que a entrega nao ficasse restrita a exemplos isolados, mas cobrisse todo o conjunto pedido." 
+
+Dados objetivos para apresentar no slide:
+
+- total processado: 162 instancias JSP (163 linhas no CSV, contando cabecalho)
+- media geral de makespan: 2253.06
+- menor makespan observado: ft06Jsp = 58
+- maior makespan observado: ta73Jsp = 6316
+- arquivos detalhados gerados: 162 (um por instancia)
+- distribuicao por familias: abz (5), ft (3), la (40), orb (10), swv (20), ta (80), yn (4)
+- exemplos rapidos de saida: abz5Jsp = 1388, abz6Jsp = 1091, abz7Jsp = 808, ft10Jsp = 1191
+
+Fala curta com numeros:
+
+"Na etapa JSP, processamos 162 instancias e geramos 162 relatorios detalhados, alem do consolidado em CSV. A media geral de makespan foi 2253.06, com minimo 58 na ft06Jsp e maximo 6316 na ta73Jsp. A distribuicao por familia foi: abz 5, ft 3, la 40, orb 10, swv 20, ta 80 e yn 4 instancias. Esses resultados mostram cobertura completa do conjunto e variacao coerente com o porte das familias." 
 
 Mostre:
 
@@ -229,6 +256,98 @@ Fala pronta detalhada:
 - priorizar figuras, fluxo logico, grafo fixo e tabela de resultados
 - usar o codigo apenas se a banca pedir detalhes tecnicos especificos
 - focar em algoritmo, modelagem, heuristica, corretude e interpretacao dos resultados
+
+## Estrategia para nota alta (essencial)
+
+Mensagem central para repetir em 3 momentos (abertura, meio e fechamento):
+
+"Nossa contribuicao nao e apenas executar uma heuristica: e mostrar que o makespan sai diretamente de uma modelagem em DAG, validada no grafo fixo do enunciado e depois escalada para 162 instancias JSP."
+
+Checklist de argumentos que mais pontuam:
+
+- aderencia ao enunciado: modelagem em digrafo com peso em vertice, ordem topologica, caminho maximo e caminho reconstruido
+- corretude em duas camadas: primeiro no grafo fixo do professor, depois no conjunto completo JSP
+- reproducibilidade: mesma entrada gera mesmos resultados, com arquivos consolidados e detalhados
+- interpretacao critica: explicar por que valores altos de makespan podem refletir dificuldade estrutural da instancia
+- limites da abordagem: reconhecer que e heuristica (nao garante otimo global), mas e adequada ao escopo da disciplina
+
+Frases curtas de impacto para a banca:
+
+- "Nao usamos grafo apenas para ilustrar: usamos grafo para calcular o numero final da solucao."
+- "Validamos primeiro a base teorica, depois a escala experimental."
+- "Cada valor de makespan apresentado e rastreavel por caminho critico no DAG."
+
+## Plano visual da apresentacao (o que mostrar em cada slide)
+
+Visual 1 - Fluxo logico da solucao (Slides 5 e 5.1):
+
+- formato recomendado: diagrama de blocos horizontal com 5 etapas
+- etapas: leitura da instancia -> reconstrucao de precedencias -> construcao da agenda (GT) -> montagem do DAG -> caminho critico/makespan
+- ferramenta sugerida: diagrams.net (draw.io), PowerPoint SmartArt ou Canva
+- objetivo pedagogico: permitir que a banca entenda o algoritmo sem ver codigo
+
+Visual 2 - Grafo fixo do enunciado (Slide 9):
+
+- mostrar o grafo do PDF do professor com destaque (cor) para o caminho critico 7 -> 10 -> 1 -> 11 -> 14 -> 13 -> 6
+- ao lado, mostrar os tres valores validados: 62 (linha 6), 56 (linha 13), 53 (linha 9)
+- fonte dos valores: [output/fixed_graph_report.txt](output/fixed_graph_report.txt)
+- objetivo pedagogico: prova de corretude da implementacao de DAG antes do JSP
+
+Visual 3 - Tabela consolidada de resultados (Slide 10):
+
+- mostrar recorte da tabela geral em [output/results_table.pdf](output/results_table.pdf)
+- destacar no slide (caixas ou callouts): media 2253.06, minimo 58 (ft06Jsp), maximo 6316 (ta73Jsp)
+- adicionar legenda curta: 162 instancias processadas, 162 detalhes gerados
+- fonte principal: [output/jsp_makespan_results.csv](output/jsp_makespan_results.csv)
+
+Visual 4 - Grafico por familia (Slide 11):
+
+- grafico recomendado: barras com media de makespan por familia
+- valores sugeridos: abz 1007.80, ft 947.00, la 1281.97, orb 1169.90, swv 2965.85, ta 2876.75, yn 1170.25
+- opcional: grafico de dispersao com todas as instancias para mostrar amplitude dos valores
+- objetivo pedagogico: evidenciar que a variacao acompanha o porte e a dificuldade das familias
+
+## Como gerar os visuais rapidamente (passo a passo)
+
+1) Regerar resultados (se necessario):
+
+```bash
+g++ -std=c++17 -O2 -Wall -Wextra -pedantic main.cpp -o jsp_makespan.exe
+.\jsp_makespan.exe
+```
+
+2) Tabela consolidada pronta para slide:
+
+- usar [output/results_table.pdf](output/results_table.pdf) diretamente no slide
+- alternativa: abrir [output/results_table.html](output/results_table.html) e capturar apenas o trecho desejado
+
+3) Grafico por familia em 5 minutos (Excel/Sheets):
+
+- importar [output/jsp_makespan_results.csv](output/jsp_makespan_results.csv)
+- criar tabela dinamica por prefixo da instancia (abz, ft, la, orb, swv, ta, yn)
+- calcular media de makespan por familia
+- inserir grafico de barras e exportar como imagem
+
+4) Figura do grafo fixo:
+
+- usar a imagem do enunciado (PDF do professor) como base
+- sobrepor setas coloridas no caminho critico e inserir os comprimentos 62, 56 e 53
+- manter consistencia visual com o fluxo logico (mesma paleta e tipografia)
+
+## Distribuicao de tempo recomendada (15-20 min)
+
+- slides 1-2: 2 min (contexto e exigencias)
+- slides 3-5.1: 6 min (modelagem e fluxo da solucao)
+- slides 6-8: 4 min (heuristica, prioridade e robustez)
+- slides 9-11: 5 min (validacao no grafo fixo e resultados JSP)
+- slide 12: 1 min (fechamento forte)
+
+## Erros que derrubam nota (evitar)
+
+- chamar execucao de instancias de "compilacao" (o correto e compilar o codigo e executar nas instancias)
+- mostrar muitos numeros sem interpretacao
+- focar em implementacao de baixo nivel e esquecer o vinculo com teoria de grafos
+- nao explicitar limites da heuristica e por que ela foi escolhida
 
 ## Perguntas que podem aparecer
 
