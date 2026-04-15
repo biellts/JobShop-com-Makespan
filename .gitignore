@@ -1,0 +1,11 @@
+# Saidas geradas pelo programa
+output/
+
+# Executaveis compilados
+*.exe
+*.o
+*.out
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
